@@ -45,6 +45,10 @@ RSpec.describe StringCalculator do
       it 'will ignores numbers greater than 1000 and returns the sum of the rest' do
         expect(described_class.add("//;\n1;2;3000")).to eq(3)
       end
+
+      it 'will return 0 if all numbers are greater than 1000' do
+        expect(described_class.add("//;\n1001;2000;3000")).to eq(0)
+      end
     end
   end
 end
