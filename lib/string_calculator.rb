@@ -9,7 +9,7 @@ class StringCalculator
 
       numbers = parse_input(input)
       check_for_negatives(numbers)
-      numbers.sum
+      numbers.reject { |num| num > 1000 }.sum
     end
 
     private
