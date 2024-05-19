@@ -8,6 +8,7 @@ class StringCalculator
       return 0 if input.empty?
 
       numbers = parse_input(input)
+      check_for_negatives(numbers)
       numbers.sum
     end
 
@@ -27,6 +28,13 @@ class StringCalculator
     # Splits the input string based on a delimiter and returns an array of integers.
     def split_string(string, delim)
       string.split(delim).map(&:to_i)
+    end
+
+    # Checks for negative numbers in the provided array.
+    # If negative numbers are found, raises an exception and provide the list of negative numbers.
+    def check_for_negatives(numbers)
+      negatives = numbers.select(&:negative?)
+      raise "negative numbers not allowed #{negatives.join(',')}" if negatives.any?
     end
   end
 end
