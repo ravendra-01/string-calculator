@@ -40,5 +40,11 @@ RSpec.describe StringCalculator do
         expect { StringCalculator.add("//;\n1;-2;-3") }.to raise_error(RuntimeError, error)
       end
     end
+
+    context 'when input includes numbers greater than 1000' do
+      it 'will ignores numbers greater than 1000 and returns the sum of the rest' do
+        expect(described_class.add("//;\n1;2;3000")).to eq(3)
+      end
+    end
   end
 end
