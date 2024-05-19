@@ -14,14 +14,24 @@ class StringCalculator
 
     private
 
-    # Returns an array of delimiters delimiters given in string using '//delim1\n'.
+    # Parses the input string based on the presence of custom delimiters and returns an array of numbers.
     def parse_input(input)
       if input.start_with?('//')
         custom_delimiter, string = input.split("\n", 2)
-        custom_delimiter = custom_delimiter.gsub('//', '')
-        split_string(string, custom_delimiter)
+        extract_delimiters(custom_delimiter, string)
       else
         split_string(input, /,|\n/)
+      end
+    end
+
+    # Returns an array of delimiters given in string using format: '//[delim1][delim2]\n' or '//delim1\n'.
+    def extract_delimiters(custom_delimiter, string)
+      if custom_delimiter.start_with?('//[')
+        custom_delimiter = custom_delimiter.scan(/\[(.*?)\]/).flatten
+        split_string(string, Regexp.union(custom_delimiter))
+      else
+        custom_delimiter = custom_delimiter.gsub('//', '')
+        split_string(string, custom_delimiter)
       end
     end
 
