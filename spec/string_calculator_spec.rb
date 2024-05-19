@@ -9,5 +9,11 @@ RSpec.describe StringCalculator do
         expect(described_class.add('')).to eq(0)
       end
     end
+
+    context 'when input contains single numbers' do
+      it 'will return number itself' do
+        expect(described_class.add('5')).to eq(5)
+      end
+    end
   end
 end
